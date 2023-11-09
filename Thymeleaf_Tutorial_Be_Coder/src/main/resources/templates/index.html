@@ -6,9 +6,13 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"></link>
 </head>
 <body>
+	
+	<!--header -->
+	<div th:replace="~{header::myheader}"></div>
+	
 	<h1>Thymeleaf Tutorials</h1>
 <h1>index page</h1>
-</body>
+
 <h1 data-th-text="#{youtube.name}"></h1>
 <p th:utext="#{youtube.name}"></p>
 <p>Today date is ::[[${date}]]</p>
@@ -41,4 +45,6 @@ properties ko select kiye
 
 <a th:href="@{'profile/'+${user1.id}}">profile</a>
 
+<div th:replace="~{footer::myfooter}"></div>
+</body>
 </html>
