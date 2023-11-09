@@ -11,4 +11,33 @@
 <h1 data-th-text="#{youtube.name}"></h1>
 <p th:utext="#{youtube.name}"></p>
 <p>Today date is ::[[${date}]]</p>
+<!--to use dynamic data,we use $ with expression not #-->
+<p  th:text="${date}"></p>
+
+
+<!--but ye sahi tareeka nahi hai ,user ko baar baar likh ke uske properties ko call karna-->
+<h2 th:text="${user1.name}"></h2>
+<h2 th:text="${user1.id}"></h2>
+<h2 th:text="${user1.address}"></h2>
+
+
+<!--sahi tareeka ::
+
+pehle hm user object ko select kiye th:object="${}" se and then * se har 
+properties ko select kiye 
+
+-->
+
+
+<div th:object="${user1}">
+
+<h3>Id: [[*{id}]]</h3>	
+<h3>name: [[*{name}]]</h3>	
+<h3>Address: [[*{address}]]</h3>	
+		
+	
+</div>
+
+<a th:href="@{'profile/'+${user1.id}}">profile</a>
+
 </html>
