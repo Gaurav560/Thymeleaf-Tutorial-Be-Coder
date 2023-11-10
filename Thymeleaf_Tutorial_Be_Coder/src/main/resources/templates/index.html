@@ -118,6 +118,22 @@ th:attr="value=#{subscribe.submit}"
 />
 
 
+
+<!--if else using expressions
+if wala condition hi unless block mein bhi likhna hoga
+
+-->
+<div th:if="${3>4}">
+	3 is less than 4
+</div>
+
+
+<div th:unless="${3>4}">
+3 is less than 4
+</div>
+
+
+
 <!--footer-->
 <div th:replace="~{footer::myfooter}"></div>
 </body>
