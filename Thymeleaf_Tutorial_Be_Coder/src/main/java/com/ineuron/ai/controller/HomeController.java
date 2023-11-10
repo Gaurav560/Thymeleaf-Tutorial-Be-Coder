@@ -19,7 +19,8 @@ public class HomeController {
 	
 	User user1=new User(1,"Gaurav","Gaya");
 	m.addAttribute("user1",user1);
-	
+	m.addAttribute("status",true);
+	m.addAttribute("msg","GauravKeepGoing");
 		return "index";
 	}
 

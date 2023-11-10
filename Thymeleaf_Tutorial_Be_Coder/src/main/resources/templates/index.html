@@ -45,6 +45,26 @@ properties ko select kiye
 
 <a th:href="@{'profile/'+${user1.id}}">profile</a>
 
+
+<!--literals example-->
+<p>
+	in two yearsi.e,<span th:text="2023+2" ></span>,i am going to be rich no matter what.
+</p>
+
+
+<!--checking conditions through expressions-->
+<div th:if="${status}==true">
+	true block
+</div>
+
+
+<!--concatenation of another string using + and with dynamic data-->
+<div>welcome to the family of <p th:text="'and the family of Sharma'+${msg}"></p></div>
+<h3 th:text="|hello guys welcome to ${msg}|"></h3>
+
+
+
+<!--footer-->
 <div th:replace="~{footer::myfooter}"></div>
 </body>
 </html>
