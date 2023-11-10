@@ -18,10 +18,13 @@
 	
 	<!--table starts here-->
 	<h1 class="text-center">User Details Table</h1>
+	
+	<div class="row">
+		
+		<div class="col-md-6 offset-md-4">
 	<table class="table text">
   <thead>
     <tr>
-      <th scope="col">Sl no</th>
       <th scope="col">Id</th>
       <th scope="col">Name</th>
       <th scope="col">Address</th>
@@ -31,14 +34,16 @@
 	  
 	  <!--fetching data dynamically with thymeleaf iteration -->
     <tr th:each="u:${userList}">
-      <th scope="row">1</th>
-      <td>[[${u.id}]]</td>
+     
+      <td class="" th:classappend="${u.id%2==0}? 'bg-success':'bg-warning'">[[${u.id}]]</td>
       <td>[[${u.name}]]</td>
       <td>[[${u.address}]]</td>
     </tr>
    
   </tbody>
 </table>
+</div>
+	</div>
 	<!--table ends here-->
 	
 	
