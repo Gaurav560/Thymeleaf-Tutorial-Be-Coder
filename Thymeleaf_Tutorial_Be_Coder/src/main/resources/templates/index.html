@@ -64,6 +64,37 @@ properties ko select kiye
 
 
 
+<!--Arithmetic Expression
+
+th:with  expression se hm kisi variable mein value store kar ke rakh sakte hain.
+
+-->
+
+<div th:with="sum=${2+4}">
+	sum of 2 and 4 is=[[${sum}]]
+	
+	<th:block th:if="${sum%2==0}">it is even  </th:block>
+	
+	
+</div>
+
+
+<!--Another method of writing less than and greater than 
+here ge means greater than 
+and le means less than.
+
+-->
+
+<div th:if="${2 ge 1}">
+	2 is greater than 1
+	
+</div>
+
+
+
+
+
+
 <!--footer-->
 <div th:replace="~{footer::myfooter}"></div>
 </body>
