@@ -21,6 +21,7 @@ public class HomeController {
 	m.addAttribute("user1",user1);
 	m.addAttribute("status",true);
 	m.addAttribute("msg","GauravKeepGoing");
+	m.addAttribute("user2", null);
 		return "index";
 	}
 
