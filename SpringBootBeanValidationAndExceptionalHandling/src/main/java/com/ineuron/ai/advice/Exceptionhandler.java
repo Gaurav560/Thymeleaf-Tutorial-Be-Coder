@@ -2,12 +2,13 @@ package com.ineuron.ai.advice;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.ineuron.ai.exception.UserNotFoundException;
 
 @RestControllerAdvice
 public class Exceptionhandler {
@@ -30,6 +31,15 @@ public class Exceptionhandler {
 
 		return errorMap;
 
+	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(UserNotFoundException.class)
+	public Map<String, String> handleUserNotFoundById(UserNotFoundException exception1){
+		Map<String, String> errorMap2 = new HashMap<>();
+		errorMap2.put("errorMessage", exception1.getMessage());
+		return errorMap2;
+		
 	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ineuron.ai.dto.UserRequest;
 import com.ineuron.ai.entity.User;
+import com.ineuron.ai.exception.UserNotFoundException;
 import com.ineuron.ai.service.UserService;
 
 import jakarta.validation.Valid;
@@ -37,7 +38,7 @@ public class UserController {
 	}
 
 	@GetMapping("/getUserById/{id}")
-	public ResponseEntity<User> getUser(@PathVariable int id) {
+	public ResponseEntity<User> getUser(@PathVariable int id) throws UserNotFoundException {
 		return ResponseEntity.ok(userService.getUser(id));
 	}
 }

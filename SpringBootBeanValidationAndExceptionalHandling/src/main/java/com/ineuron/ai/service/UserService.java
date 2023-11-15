@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ineuron.ai.dto.UserRequest;
 import com.ineuron.ai.entity.User;
+import com.ineuron.ai.exception.UserNotFoundException;
 import com.ineuron.ai.repo.UserRepo;
 
 @Service
@@ -26,7 +27,15 @@ public class UserService {
 		return userRepo.findAll();
 	}
 
-	public User getUser(int id) {
-		return userRepo.findByUserId(id);
+	public User getUser(int id) throws UserNotFoundException {
+		
+		User user=userRepo.findByUserId(id);
+		if (user!=null) {
+			return user;
+			
+		}else {
+			throw new UserNotFoundException("User Not Found with the given id "+id);
+		}
+		
 	}
 }
