@@ -12,15 +12,15 @@ public class ResourceNotFoundException extends Exception {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String resourceName;
-	private String fieldName;
-	private Integer fieldValue;
-
-	public ResourceNotFoundException(String resourceName, String fieldName, Integer userId) {
-		super(String.format("%s not found with %s:%l", resourceName, fieldName, userId));
+	String resourceName;
+	String fieldName;
+	Integer fieldValue;
+	
+	public ResourceNotFoundException(String resourceName, String fieldName, Integer fieldValue) {
+		super(String.format("%s not found with %s : %l",resourceName,fieldName,fieldValue));
 		this.resourceName = resourceName;
 		this.fieldName = fieldName;
-		this.fieldValue = userId;
+		this.fieldValue = fieldValue;
 	}
 
 }

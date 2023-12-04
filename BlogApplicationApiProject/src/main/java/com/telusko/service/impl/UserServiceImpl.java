@@ -1,8 +1,10 @@
 package com.telusko.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.telusko.entity.User;
 import com.telusko.exception.ResourceNotFoundException;
@@ -11,6 +13,7 @@ import com.telusko.repo.UserRepo;
 import com.telusko.service.UserService;
 
 //implementation class of UserService Interface
+@Service
 public class UserServiceImpl implements UserService {
 
 	// injecting userRepo object with @Autowired annotation
@@ -29,36 +32,48 @@ public class UserServiceImpl implements UserService {
 
 	// method for updating a user using his/her id
 	@Override
-	public UserDto updateUser(UserDto userDto, Integer userId) {
+	public UserDto updateUser(UserDto userDto, Integer userId) throws ResourceNotFoundException {
+		User user = this.userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
 
-User user=this.userRepo.findById(userId).orElseThrow(()->  new ResourceNotFoundException("User","userId",userId));
-	
-	
-	
-	
+		user.setName(userDto.getName());
+		user.setUserEmail(userDto.getUserEmail());
+		user.setUserPassword(userDto.getUserPassword());
+		user.setUserDetail(userDto.getUserDetail());
+
+		return this.entityToDto(user);
+
 	}
 
 	// method for getting a user using his/her id
 	@Override
-	public UserDto getUserById(int userId) {
-
-		return null;
+	public UserDto getUserById(int userId) throws ResourceNotFoundException {
+		
+		 User user=this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("user", "id", userId));
+		return this.entityToDto(user);
 	}
 
 	// method for deleting a user using his/her id
 	@Override
-	public void deleteUserByid(int userId) {
+	public void deleteUserByid(int userId) throws ResourceNotFoundException {
+		User user = this.userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("user", "id", userId));
+		this.userRepo.delete(user);
 
 	}
 
 	// method for getting all users in db table
 	@Override
 	public List<UserDto> getAllUsers() {
+		List<User> users = userRepo.findAll();
 
-		return null;
+//using stream api to map user into userDto
+		List<UserDto> userDtos = users.stream().map(user -> this.entityToDto(user)).collect(Collectors.toList());
+
+		return userDtos;
 	}
 
-	// making model mapper methods to convert the user from dto and vice-versa
+	// making Model Mapper methods to convert the user from dto and vice-versa
 
 	// method to convert userDto to User entity object
 	public User dtoToEntity(UserDto userDto) {
